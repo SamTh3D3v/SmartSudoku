@@ -19,7 +19,7 @@ public class activity_choix extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity_choix.this,
                 android.R.layout.simple_list_item_1, listeChoix);
         mListView.setAdapter(adapter);
-        mListView.setClickable(true);
+        mListView.setClickable(true) ;
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
