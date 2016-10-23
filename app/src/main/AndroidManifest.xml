@@ -17,7 +17,8 @@
         </activity>
         <activity android:name=".activity_jeu" />
         <activity android:name=".activity_about" />
-        <activity android:name=".activity_choix"></activity>
+        <activity android:name=".activity_choix" />
+        <activity android:name=".activity_difficulty"></activity>
     </application>
 
 </manifest>

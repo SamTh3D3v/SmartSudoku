@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         jouerB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),activity_jeu.class);
+                Intent intent = new Intent(view.getContext(),activity_difficulty.class);
                 startActivity(intent);
             }
         });
