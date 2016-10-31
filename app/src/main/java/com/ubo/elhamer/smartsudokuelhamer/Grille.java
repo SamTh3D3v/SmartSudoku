@@ -16,26 +16,36 @@ public class Grille extends View {
     private Paint paint2;
     private Paint paint3;
 
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    private Difficulty difficulty;
+
     private int[][] matrix = new int[9][9];
     private boolean[][] fixIdx = new boolean[9][9];
 
-    public Grille(Context context, AttributeSet attrs, int defStyle) {
+    public Grille(Context context, AttributeSet attrs, int defStyle,int difficulty) {
         super(context, attrs, defStyle);
-        init();
+        init(difficulty);
     }
 
-    public Grille(Context context, AttributeSet attrs) {
+    public Grille(Context context, AttributeSet attrs,int difficulty) {
         super(context, attrs);
-        init();
+        init(difficulty);
     }
 
-    public Grille(Context context) {
+    public Grille(Context context,int difficulty) {
         super(context);
-        init();
+        init(difficulty);
     }
 
-    private void init() {
-        set("000105000140000670080002400063070010900000003010090520007200080026000035000409000");
+    private void init(int difficulty) {
+        //set("000105000140000670080002400063070010900000003010090520007200080026000035000409000");
         // set("672145398145983672389762451263574819958621743714398526597236184426817935831459267");
         // set("123456789912345678891234567789123456678912345567891234456789123345678912234567891");
         // set("000400870", 0);
@@ -47,7 +57,7 @@ public class Grille extends View {
         // set("090308007", 6);
         // set("003240160", 7);
         // set("012000090", 8);
-
+        SimpleBoardGenerator.GenerateValidBoard(difficulty,matrix,fixIdx);
         paint1 = new Paint();
         paint1.setAntiAlias(true);
         paint1.setColor(Color.BLACK);
@@ -62,8 +72,7 @@ public class Grille extends View {
         paint3 = new Paint();
         paint3.setAntiAlias(true);
         paint3.setColor(Color.BLACK);
-        //BacktrackingSudokuSolver.IsGridValide(matrix.clone());
-        BoardGenerator.generateValidPrimitiveBoard(1);
+
     }
 
     @Override

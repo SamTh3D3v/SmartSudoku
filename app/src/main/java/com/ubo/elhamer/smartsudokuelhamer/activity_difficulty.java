@@ -18,6 +18,7 @@ public class activity_difficulty extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 Intent intent=new Intent(view.getContext(),activity_jeu.class);
+                intent.putExtra("diff",Difficulty.Medium.getValue());
                 startActivity(intent);
             }
         });
@@ -27,6 +28,7 @@ public class activity_difficulty extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 Intent intent=new Intent(view.getContext(),activity_jeu.class);
+                intent.putExtra("diff",Difficulty.Easy.getValue());
                 startActivity(intent);
             }
         });
@@ -36,6 +38,7 @@ public class activity_difficulty extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 Intent intent=new Intent(view.getContext(),activity_jeu.class);
+                intent.putExtra("diff",Difficulty.Hard.getValue());
                 startActivity(intent);
             }
         });

@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class activity_jeu extends AppCompatActivity {
@@ -27,7 +28,10 @@ public class activity_jeu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jeu);
-        grille=(Grille) findViewById(R.id.MainGrille);
+        //grille=(Grille) findViewById(R.id.MainGrille);
+        Intent mIntent = getIntent();
+        grille=new Grille(this.getBaseContext(), mIntent.getIntExtra("diff",0));
+        ((RelativeLayout) findViewById(R.id.activity_jeu)).addView(grille);
         intent=new Intent(this, activity_choix.class);
 
 

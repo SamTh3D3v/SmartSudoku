@@ -69,11 +69,11 @@ public class BoardGenerator {
                             tmpGrid[_line][_column].getPossibleValues().remove(new Integer(randValue));
 
 
-                if(BacktrackingSudokuSolver.IsGridValide(tmpGrid)){
+                /*if(BacktrackingSudokuSolver.IsGridValide(tmpGrid)){
                     cpt++;
                 }else{
                     tmpGrid=originalGrid;
-                }
+                }*/
             }
         }
         return tmpGrid;
