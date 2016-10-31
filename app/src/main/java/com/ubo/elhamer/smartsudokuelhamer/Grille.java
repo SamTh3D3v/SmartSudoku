@@ -62,6 +62,8 @@ public class Grille extends View {
         paint3 = new Paint();
         paint3.setAntiAlias(true);
         paint3.setColor(Color.BLACK);
+        //BacktrackingSudokuSolver.IsGridValide(matrix.clone());
+        BoardGenerator.generateValidPrimitiveBoard(1);
     }
 
     @Override

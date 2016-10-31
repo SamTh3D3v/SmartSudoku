@@ -7,56 +7,56 @@ package com.ubo.elhamer.smartsudokuelhamer;
 
 public class BacktrackingSudokuSolver {
 
-    static Boolean valueValideInLine(int val, int[][] grid, int line)
+    static Boolean valueValideInLine(int val, GridCase[][] grid, int line)
     {
         for (int j=0; j < 9; j++)
-            if (grid[line][j] == val)
+            if (grid[line][j].getVal() == val)
                 return false;
         return true;
     }
 
-    static Boolean valueValideInColumn(int val, int[][] grid, int column)
+    static Boolean valueValideInColumn(int val, GridCase[][] grid, int column)
     {
         for (int i=0; i < 9; i++)
-            if (grid[i][column] == val)
+            if (grid[i][column].getVal() == val)
                 return false;
         return true;
     }
 
-    static Boolean valueValideInBlock(int val, int[][] grid, int i, int j)
+    static Boolean valueValideInBlock(int val, GridCase[][] grid, int i, int j)
     {
         int _i = i-(i%3), _j = j-(j%3);
         for (i=_i; i < _i+3; i++)
             for (j=_j; j < _j+3; j++)
-                if (grid[i][j] == val)
+                if (grid[i][j].getVal() == val)
                     return false;
         return true;
     }
-    public static Boolean IsGridValide(int[][] grid){
+    public static Boolean IsGridValide(GridCase[][] grid){
         return isGridValide(grid,0);
     }
 
-    static Boolean isGridValide(int[][] grid, int position)
+    static Boolean isGridValide(GridCase[][] grid, int position)
     {
         if (position == 9*9)
             return true;
 
         int i = position/9, j = position%9;
 
-        if (grid[i][j] != 0)
+        if (grid[i][j].getVal() != 0)
             return isGridValide(grid, position+1);
 
         for (int k=1; k <= 9; k++)
         {
             if (valueValideInLine(k,grid,i) && valueValideInColumn(k,grid,j) && valueValideInBlock(k,grid,i,j))
             {
-                grid[i][j] = k;
+                grid[i][j].setVal(k);
 
                 if ( isGridValide (grid, position+1) )
                     return true;
             }
         }
-        grid[i][j] = 0;
+        grid[i][j].setVal(0);
         return false;
     }
 
