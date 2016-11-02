@@ -74,14 +74,15 @@ public class activity_jeu extends AppCompatActivity {
             }
         });
 
+
+
         Button validerB = (Button) findViewById(R.id.ValiderButton);
         validerB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //Code de validation de grille
-                valider(view);
-
+            public void onClick(View v) {
+//Code de validation de grille
+                Toast.makeText(activity_jeu.this, "I am in",
+                        Toast.LENGTH_LONG).show();
+                valider(v);
             }
         });
 
