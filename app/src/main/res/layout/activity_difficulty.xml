@@ -31,13 +31,13 @@
             android:id="@+id/EasyButton" />
 
         <Button
-            android:text="Hard"
+            android:text="Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/HardButton" />
 
         <Button
-            android:text="Very Hard"
+            android:text="Hard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/VeryHardButton" />

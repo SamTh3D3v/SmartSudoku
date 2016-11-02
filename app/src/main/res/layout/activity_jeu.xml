@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_jeu"
@@ -9,10 +16,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.ubo.elhamer.smartsudokuelhamer.activity_jeu">
-    <com.ubo.elhamer.smartsudokuelhamer.Grille
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/MainGrille" />
+
 
     <Button
         android:text="Valider"
@@ -24,3 +28,11 @@
         android:layout_alignParentStart="true" />
 
 </RelativeLayout>
+    <ListView
+        android:id="@+id/navList"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|start"
+        android:background="#ffeeeeee"/>
+
+</android.support.v4.widget.DrawerLayout>
