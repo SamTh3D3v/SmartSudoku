@@ -43,7 +43,8 @@ public class activity_jeu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jeu);
 
-        mDrawerList = (ListView)findViewById(R.id.navList);mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView)findViewById(R.id.navList);
+        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
 
         addDrawerItems();
@@ -80,22 +81,46 @@ public class activity_jeu extends AppCompatActivity {
         validerB.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 //Code de validation de grille
-                Toast.makeText(activity_jeu.this, "I am in",
-                        Toast.LENGTH_LONG).show();
                 valider(v);
             }
         });
 
     }
     private void addDrawerItems() {
-        String[] osArray = { "Nouveau", "aide", "resoudre", "a propos" };
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        String[] menuArray = { "Nouveau", "Aide","Valider","Resoudre", "A propos" };
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuArray);
         mDrawerList.setAdapter(mAdapter);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(activity_jeu.this, "operation!", Toast.LENGTH_SHORT).show();
+                switch (position){
+                    case 0: //nouvelle partie
+                        Intent intent = new Intent(view.getContext(),activity_difficulty.class);
+                        startActivity(intent);
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case 1: //help
+                        //a implementer
+                        grille.setHelperOn(!grille.isHelperOn());
+                        grille.invalidate();
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case 2: //valider
+                        valider(view);
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case 3: //Resoudre or solve the grid
+                        BacktrackingSudokuSolver.IsGridValide(grille.getOriginalMatrix());
+                        grille.invalidate();
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case 4: //Credit, A propos
+                        Intent inte = new Intent(view.getContext(),activity_about.class);
+                        startActivity(inte);
+                        mDrawerLayout.closeDrawers();
+                        break;
+                }
             }
         });
     }
@@ -103,18 +128,16 @@ public class activity_jeu extends AppCompatActivity {
     private void setupDrawer() {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
 
-            /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 getSupportActionBar().setTitle("Menu");
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                invalidateOptionsMenu();
             }
 
-            /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 getSupportActionBar().setTitle(mActivityTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                invalidateOptionsMenu();
             }
         };
 

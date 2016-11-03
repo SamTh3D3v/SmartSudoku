@@ -22,22 +22,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/difficultyText"
-            tools:text="Choose difficulty" />
+            tools:text="degré de difficulté" />
 
         <Button
-            android:text="Easy"
+            android:text="Simple"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/EasyButton" />
 
         <Button
-            android:text="Medium"
+            android:text="Moyen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/HardButton" />
 
         <Button
-            android:text="Hard"
+            android:text="Dur"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/VeryHardButton" />

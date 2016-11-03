@@ -9,22 +9,56 @@ import android.view.View;
 
 public class Grille extends View {
 
+
+
+    private boolean helperOn=false;
     private int screenWidth;
     private int screenHeight;
     private int n;
-    private Paint paint1;
-    private Paint paint2;
-    private Paint paint3;
+    private Paint blackPaint;
+    private Paint redPaint;
+    private Paint grayPaint;
+    private Paint greenPaint;
+    private Paint orangePaint;
 
-    public Difficulty getDifficulty() {
-        return difficulty;
+    public boolean isHelperOn() {
+        return helperOn;
     }
 
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty;
+    public void setHelperOn(boolean helperOn) {
+        this.helperOn = helperOn;
+    }
+    //turn the matrix to its original state
+    public int[][] getOriginalMatrix() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if(!fixIdx[i][j])
+                    matrix[i][j]=0;
+            }
+        }
+        return matrix;
+    }
+    //return a copy of the original matrix
+    public int[][] getOriginalMatrixClone() {
+        //clone matrix
+        int [][] matrixCopy = new int[matrix.length][];
+        for(int i = 0; i < matrix.length; i++)
+            matrixCopy[i] = matrix[i].clone();
+
+
+      //set original matrix
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if(!fixIdx[i][j])
+                    matrixCopy[i][j]=0;
+            }
+        }
+        return matrixCopy;
     }
 
-    private Difficulty difficulty;
+    public void setMatrix(int[][] matrix) {
+        this.matrix = matrix;
+    }
 
     private int[][] matrix = new int[9][9];
     private boolean[][] fixIdx = new boolean[9][9];
@@ -58,20 +92,29 @@ public class Grille extends View {
         // set("003240160", 7);
         // set("012000090", 8);
         SimpleBoardGenerator.GenerateValidBoard(difficulty,matrix,fixIdx);
-        paint1 = new Paint();
-        paint1.setAntiAlias(true);
-        paint1.setColor(Color.BLACK);
-        paint1.setStrokeWidth(2);
-        paint1.setTextSize(40);
+        blackPaint = new Paint();
+        blackPaint.setAntiAlias(true);
+        blackPaint.setColor(Color.BLACK);
+        blackPaint.setStrokeWidth(2);
+        blackPaint.setTextSize(40);
 
-        paint2 = new Paint();
-        paint2.setAntiAlias(true);
-        paint2.setColor(Color.RED);
-        paint2.setStrokeWidth(3);
-        paint2.setTextSize(40);
-        paint3 = new Paint();
-        paint3.setAntiAlias(true);
-        paint3.setColor(Color.BLACK);
+        redPaint = new Paint();
+        redPaint.setAntiAlias(true);
+        redPaint.setColor(Color.RED);
+        redPaint.setStrokeWidth(3);
+        redPaint.setTextSize(40);
+
+        grayPaint = new Paint();
+        grayPaint.setAntiAlias(true);
+        grayPaint.setColor(Color.LTGRAY);
+
+        greenPaint = new Paint();
+        greenPaint.setAntiAlias(true);
+        greenPaint.setColor(Color.GREEN);
+
+        orangePaint = new Paint();
+        orangePaint.setAntiAlias(true);
+        orangePaint.setColor(Color.rgb(255,165,0));
 
     }
 
@@ -86,13 +129,23 @@ public class Grille extends View {
         // Dessiner les lignes noires et rouges
         for(int j=0; j<10;j++){
             if(j%3 != 0){
-                canvas.drawLine(0, j*n, x-10, j*n, paint1);
-                canvas.drawLine(j*n,0, j*n,x-10 , paint1);
+                canvas.drawLine(0, j*n, x-10, j*n, blackPaint);
+                canvas.drawLine(j*n,0, j*n,x-10 , blackPaint);
             }else{
-                canvas.drawLine(0, j*n, x-10, j*n, paint2);
-                canvas.drawLine(j*n,0, j*n,x-10 , paint2);
+                canvas.drawLine(0, j*n, x-10, j*n, redPaint);
+                canvas.drawLine(j*n,0, j*n,x-10 , redPaint);
             }
         }
+
+        //le helper
+        int[][] matrixClone=new int[9][9];
+        if(helperOn){
+
+            //clone the matrix
+            matrixClone=getOriginalMatrixClone();
+            BacktrackingSudokuSolver.IsGridValide(matrixClone);
+        }
+
 
 
         // Le contenu d'une case
@@ -100,12 +153,24 @@ public class Grille extends View {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 s = "" + (matrix[j][i] == 0 ? "" : matrix[j][i]);
-                if (fixIdx[j][i])
+                if (fixIdx[j][i]) {
+                    canvas.drawRect(i * n+1,j * n+1,i * n+n-1,j * n+n-1,grayPaint);
                     canvas.drawText(s, i * n + (n / 2) - (n / 10), j * n
-                            + (n / 2) + (n / 10), paint2);
-                else
+                            + (n / 2) + (n / 10), redPaint);
+                }
+                else {
+
+                    if(helperOn){
+                        if (matrixClone[j][i]==matrix[j][i])
+                            canvas.drawRect(i * n+1,j * n+1,i * n+n-1,j * n+n-1,greenPaint);
+                        else
+                            canvas.drawRect(i * n+1,j * n+1,i * n+n-1,j * n+n-1,orangePaint);
+
+                    }
+
                     canvas.drawText(s, i * n + (n / 2) - (n / 10), j * n
-                            + (n / 2) + (n / 10), paint1);
+                            + (n / 2) + (n / 10), blackPaint);
+                }
             }
         }
     }

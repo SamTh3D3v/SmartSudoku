@@ -15,11 +15,24 @@ public class SimpleBoardGenerator {
            tmpGrid[i/9][i%9]=0;
            maskGrid[i/9][i%9]=true;
        }
-
         int randCase = ThreadLocalRandom.current().nextInt(0, 81);
         int line = randCase / 9;
         int column = randCase % 9;
-        tmpGrid[line][column]=ThreadLocalRandom.current().nextInt(1,10);
+
+//this code is used to make sure that the tree firts cases of the grid are random, oussama
+        tmpGrid[0][0]=ThreadLocalRandom.current().nextInt(1,10);
+        int rand2=tmpGrid[0][0];
+        while(rand2 == tmpGrid[0][0]){
+            rand2=ThreadLocalRandom.current().nextInt(1,10);
+        }
+        tmpGrid[0][1]=rand2;
+        int rand3=ThreadLocalRandom.current().nextInt(1,10);
+        while(rand3 == tmpGrid[0][0] || rand3 == tmpGrid[0][1]){
+            rand3=ThreadLocalRandom.current().nextInt(1,10);
+        }
+        tmpGrid[0][2]=rand3;
+
+//----------------------------------------------------------------------------------------
 
         BacktrackingSudokuSolver.IsGridValide(tmpGrid);
 
