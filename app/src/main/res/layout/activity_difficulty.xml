@@ -18,11 +18,10 @@
         android:layout_alignParentEnd="true">
 
         <TextView
-            android:text="TextView"
+            android:text="degré de difficulté"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/difficultyText"
-            tools:text="degré de difficulté" />
+            android:id="@+id/difficultyText" />
 
         <Button
             android:text="Simple"

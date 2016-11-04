@@ -7,9 +7,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+
 public class Grille extends View {
-
-
 
     private boolean helperOn=false;
     private int screenWidth;
@@ -20,6 +19,19 @@ public class Grille extends View {
     private Paint grayPaint;
     private Paint greenPaint;
     private Paint orangePaint;
+
+    public StateRect getStateRect() {
+        return stateRect;
+    }
+
+    public void setStateRect(StateRect stateRect) {
+        this.stateRect = stateRect;
+    }
+
+    private StateRect stateRect=StateRect.NoRect;
+
+    private Paint winPaint;
+    private Paint loosePaint;
 
     public boolean isHelperOn() {
         return helperOn;
@@ -116,6 +128,18 @@ public class Grille extends View {
         orangePaint.setAntiAlias(true);
         orangePaint.setColor(Color.rgb(255,165,0));
 
+        winPaint = new Paint();
+        winPaint.setAntiAlias(true);
+        winPaint.setColor(Color.GREEN);
+        winPaint.setStyle(Paint.Style.STROKE);
+        winPaint.setStrokeWidth(10);
+
+        loosePaint = new Paint();
+        loosePaint.setAntiAlias(true);
+        loosePaint.setColor(Color.RED);
+        loosePaint.setStyle(Paint.Style.STROKE);
+        loosePaint.setStrokeWidth(10);
+
     }
 
     @Override
@@ -172,6 +196,15 @@ public class Grille extends View {
                             + (n / 2) + (n / 10), blackPaint);
                 }
             }
+        }
+        //dessiner le rect de grille valide ou non
+        switch (stateRect){
+            case LoosingRect:
+                canvas.drawRect(1,1,n*9,n*9,loosePaint);
+                break;
+            case WinningRect:
+                canvas.drawRect(1,1,n*9,n*9,winPaint);
+                break;
         }
     }
 

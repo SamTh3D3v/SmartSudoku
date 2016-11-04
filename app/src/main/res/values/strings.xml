@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SmartSuDoKu Elhamer</string>
+    <string name="app_name">Smart SuDoKu</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_settings">Parametres</string>

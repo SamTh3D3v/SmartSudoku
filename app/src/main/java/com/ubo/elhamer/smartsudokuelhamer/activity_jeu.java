@@ -60,7 +60,7 @@ public class activity_jeu extends AppCompatActivity {
         intent=new Intent(this, activity_choix.class);
 
 
-        // Intent Ã  initialiser ici
+        // Intent a  initialiser ici
         // Associer la grille de l'interface graphique ici
         grille.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -87,7 +87,7 @@ public class activity_jeu extends AppCompatActivity {
 
     }
     private void addDrawerItems() {
-        String[] menuArray = { "Nouveau", "Aide","Valider","Resoudre", "A propos" };
+        String[] menuArray = { "Nouveau", "Aide ON/OFF","Valider","Resoudre", "A propos" };
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuArray);
         mDrawerList.setAdapter(mAdapter);
 
@@ -101,7 +101,6 @@ public class activity_jeu extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
                         break;
                     case 1: //help
-                        //a implementer
                         grille.setHelperOn(!grille.isHelperOn());
                         grille.invalidate();
                         mDrawerLayout.closeDrawers();
@@ -189,7 +188,7 @@ public class activity_jeu extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int request, int result, Intent intent) {
-        // vÃ©rifier si la case n'est pas fixe, on lui affecte le numÃ©ro result
+        // verifier si la case n'est pas fixe, on lui affecte le numero result
         if (request == CHOIX_NUM_FENETRE) {
             if(result == Activity.RESULT_OK){
                 String ch=intent.getStringExtra("choix");
@@ -205,12 +204,18 @@ public class activity_jeu extends AppCompatActivity {
 
     public void valider(View v) {
         boolean resultat = grille.isValid() ;
-        if(resultat)
+        if(resultat){
+            grille.setStateRect(StateRect.WinningRect);
+            grille.invalidate();
             Toast.makeText(this, "Grille Valide",
                     Toast.LENGTH_LONG).show();
-        else
+        }
+        else{
+            grille.setStateRect(StateRect.LoosingRect);
+            grille.invalidate();
             Toast.makeText(this, "Grille Non Valide",
                     Toast.LENGTH_LONG).show();
-        System.out.println("RÃ©sultat : "+resultat);
+            System.out.println("Resultat : "+resultat);
+        }
     }
 }

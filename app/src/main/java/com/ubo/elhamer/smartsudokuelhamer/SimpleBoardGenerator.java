@@ -1,6 +1,5 @@
 package com.ubo.elhamer.smartsudokuelhamer;
 
-import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
