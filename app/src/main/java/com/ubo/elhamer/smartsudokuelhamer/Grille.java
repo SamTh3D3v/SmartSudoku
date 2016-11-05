@@ -19,6 +19,7 @@ public class Grille extends View {
     private Paint grayPaint;
     private Paint greenPaint;
     private Paint orangePaint;
+    private Paint whitePaint;
 
     public StateRect getStateRect() {
         return stateRect;
@@ -140,6 +141,9 @@ public class Grille extends View {
         loosePaint.setStyle(Paint.Style.STROKE);
         loosePaint.setStrokeWidth(10);
 
+        whitePaint = new Paint();
+        whitePaint.setColor(Color.WHITE);
+
     }
 
     @Override
@@ -149,6 +153,9 @@ public class Grille extends View {
         screenHeight = getHeight();
         int x = Math.min(screenWidth, screenHeight);
         n = (x / 9) - (1 - (x % 2));
+
+        //Dessiner un rectangle de couleur clair pour mettre la Grille dedant
+        canvas.drawRect(1,1,9*n,9*n,whitePaint);
 
         // Dessiner les lignes noires et rouges
         for(int j=0; j<10;j++){
@@ -160,6 +167,8 @@ public class Grille extends View {
                 canvas.drawLine(j*n,0, j*n,x-10 , redPaint);
             }
         }
+
+
 
         //le helper
         int[][] matrixClone=new int[9][9];

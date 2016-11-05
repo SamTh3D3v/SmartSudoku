@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/backgraound"
     tools:context="com.ubo.elhamer.smartsudokuelhamer.activity_difficulty">
 
     <LinearLayout
@@ -21,24 +22,34 @@
             android:text="degré de difficulté"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/difficultyText" />
+            android:id="@+id/difficultyText"
+            android:textColor="@color/colorWhite"/>
 
         <Button
             android:text="Simple"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/EasyButton" />
+            android:id="@+id/EasyButton"
+            android:layout_margin="2dp"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorOrange"/>
 
         <Button
             android:text="Moyen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/HardButton" />
+            android:id="@+id/HardButton"
+            android:layout_margin="2dp"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorOrange"/>
 
         <Button
             android:text="Dur"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/VeryHardButton" />
+            android:id="@+id/VeryHardButton"
+            android:layout_margin="2dp"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorOrange"/>
     </LinearLayout>
 </RelativeLayout>

@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+android:background="@drawable/backgraound"
     tools:context="com.ubo.elhamer.smartsudokuelhamer.MainActivity">
 
     <LinearLayout
@@ -30,13 +31,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/JouerButton"
-            android:layout_weight="0.07" />
+            android:layout_margin="5dp"
+            android:textSize="20dp"
+            android:textColor="@color/colorWhite"
+            android:drawableLeft="@drawable/game"
+            android:background="@color/colorOrange"/>
 
         <Button
             android:text="A propos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/AboutButton"
-            android:layout_weight="0.07" />
+            android:layout_margin="5dp"
+            android:textSize="20dp"
+            android:textColor="@color/colorWhite"
+            android:drawableLeft="@drawable/about"
+            android:background="@color/colorOrange"/>
     </LinearLayout>
 </RelativeLayout>
