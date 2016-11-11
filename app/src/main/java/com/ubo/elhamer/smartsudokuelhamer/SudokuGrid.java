@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 
-public class Grille extends View {
+public class SudokuGrid extends View {
 
     private boolean helperOn=false;
     private int screenWidth;
@@ -76,34 +76,22 @@ public class Grille extends View {
     private int[][] matrix = new int[9][9];
     private boolean[][] fixIdx = new boolean[9][9];
 
-    public Grille(Context context, AttributeSet attrs, int defStyle,int difficulty) {
+    public SudokuGrid(Context context, AttributeSet attrs, int defStyle, int difficulty) {
         super(context, attrs, defStyle);
         init(difficulty);
     }
 
-    public Grille(Context context, AttributeSet attrs,int difficulty) {
+    public SudokuGrid(Context context, AttributeSet attrs, int difficulty) {
         super(context, attrs);
         init(difficulty);
     }
 
-    public Grille(Context context,int difficulty) {
+    public SudokuGrid(Context context, int difficulty) {
         super(context);
         init(difficulty);
     }
 
     private void init(int difficulty) {
-        //set("000105000140000670080002400063070010900000003010090520007200080026000035000409000");
-        // set("672145398145983672389762451263574819958621743714398526597236184426817935831459267");
-        // set("123456789912345678891234567789123456678912345567891234456789123345678912234567891");
-        // set("000400870", 0);
-        // set("047092050", 1);
-        // set("200600030", 2);
-        // set("970500203", 3);
-        // set("508024706", 4);
-        // set("604007085", 5);
-        // set("090308007", 6);
-        // set("003240160", 7);
-        // set("012000090", 8);
         SimpleBoardGenerator.GenerateValidBoard(difficulty,matrix,fixIdx);
         blackPaint = new Paint();
         blackPaint.setAntiAlias(true);
@@ -154,10 +142,8 @@ public class Grille extends View {
         int x = Math.min(screenWidth, screenHeight);
         n = (x / 9) - (1 - (x % 2));
 
-        //Dessiner un rectangle de couleur clair pour mettre la Grille dedant
         canvas.drawRect(1,1,9*n,9*n,whitePaint);
 
-        // Dessiner les lignes noires et rouges
         for(int j=0; j<10;j++){
             if(j%3 != 0){
                 canvas.drawLine(0, j*n, x-10, j*n, blackPaint);
@@ -170,7 +156,6 @@ public class Grille extends View {
 
 
 
-        //le helper
         int[][] matrixClone=new int[9][9];
         if(helperOn){
 
@@ -179,9 +164,6 @@ public class Grille extends View {
             BacktrackingSudokuSolver.IsGridValide(matrixClone);
         }
 
-
-
-        // Le contenu d'une case
         String s;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -206,7 +188,6 @@ public class Grille extends View {
                 }
             }
         }
-        //dessiner le rect de grille valide ou non
         switch (stateRect){
             case LoosingRect:
                 canvas.drawRect(1,1,n*9,n*9,loosePaint);
@@ -218,17 +199,14 @@ public class Grille extends View {
     }
 
     public int getXFromMatrix(int x) {
-        // Renvoie l'indice d'une case Ã  partir du pixel x de sa position h
         return (x / n);
     }
 
     public int getYFromMatrix(int y) {
-        // Renvoie l'indice d'une case Ã  partir du pixel y de sa position v
         return (y / n);
     }
 
     public void set(String s, int i) {
-        // Remplir la iÃ¨me ligne de la matrice matrix avec un vecteur String s
         int v;
         for (int j = 0; j < 9; j++) {
             v = s.charAt(j) - '0';
@@ -241,14 +219,12 @@ public class Grille extends View {
     }
 
     public void set(String s) {
-        // Remplir la matrice matrix Ã  partir d'un vecteur String s
         for (int i = 0; i < 9; i++) {
             set(s.substring(i * 9, i * 9 + 9), i);
         }
     }
 
     public void set(int x, int y, int v) {
-        // Affecter la valeur v Ã  la case (y,x)
         matrix[y][x]=v;
         invalidate();
     }
@@ -259,8 +235,6 @@ public class Grille extends View {
     }
 
     public boolean isValid() {
-        // 1. VÃ©rifier l'existence de chaque numÃ©ro (de 1 Ã  9) dans chaque
-        // ligne et chaque colonne
         boolean[] rl = { true, true, true, true, true, true, true, true, true };
         boolean[] rc = { true, true, true, true, true, true, true, true, true };
         for (int i = 0; i < 9; i++) {
@@ -302,8 +276,6 @@ public class Grille extends View {
                 }
             }
         }
-        // ------
-        // GagnÃ©
         return true;
     }
 }

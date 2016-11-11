@@ -11,12 +11,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_activity_layout);
         Button aboutB = (Button) findViewById(R.id.AboutButton);
         aboutB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),activity_about.class);
+                Intent intent = new Intent(view.getContext(),AboutActivity.class);
                 startActivity(intent);
             }
         });
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         jouerB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),activity_difficulty.class);
+                Intent intent = new Intent(view.getContext(),DifficultyActivity.class);
                 startActivity(intent);
             }
         });

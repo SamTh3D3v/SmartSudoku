@@ -9,14 +9,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class activity_choix extends AppCompatActivity {
+public class ChoiceActivity extends AppCompatActivity {
     private String[] listeChoix=new String[]{"1","2","3","4","5","6","7","8","9"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choix);
+        setContentView(R.layout.choice_activity_layout);
         ListView mListView = (ListView) findViewById(R.id.NumbersListeView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity_choix.this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ChoiceActivity.this,
                 android.R.layout.simple_list_item_1, listeChoix);
         mListView.setAdapter(adapter);
         mListView.setClickable(true) ;

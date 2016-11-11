@@ -31,8 +31,6 @@ public class SimpleBoardGenerator {
         }
         tmpGrid[0][2]=rand3;
 
-//----------------------------------------------------------------------------------------
-
         BacktrackingSudokuSolver.IsGridValide(tmpGrid);
 
         int cpt=0;

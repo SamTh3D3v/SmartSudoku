@@ -2,10 +2,7 @@ package com.ubo.elhamer.smartsudokuelhamer;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Configuration;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +18,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class activity_jeu extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
 
 
     private ListView mDrawerList;
@@ -32,7 +29,7 @@ public class activity_jeu extends AppCompatActivity {
 
     //getters and setters are missing in the following code
     private final int CHOIX_NUM_FENETRE = 0;
-    private Grille grille;
+    private SudokuGrid sudokuGrid;
     private Intent intent;
     private int x = 0;
     private int y = 0;
@@ -41,7 +38,7 @@ public class activity_jeu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_jeu);
+        setContentView(R.layout.game_activity_layout);
 
         mDrawerList = (ListView)findViewById(R.id.navList);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
@@ -53,22 +50,18 @@ public class activity_jeu extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        //grille=(Grille) findViewById(R.id.MainGrille);
         Intent mIntent = getIntent();
-        grille=new Grille(this.getBaseContext(), mIntent.getIntExtra("diff",0));
-        ((RelativeLayout) findViewById(R.id.activity_jeu)).addView(grille);
-        intent=new Intent(this, activity_choix.class);
+        sudokuGrid =new SudokuGrid(this.getBaseContext(), mIntent.getIntExtra("diff",0));
+        ((RelativeLayout) findViewById(R.id.activity_jeu)).addView(sudokuGrid);
+        intent=new Intent(this, ChoiceActivity.class);
 
-
-        // Intent a  initialiser ici
-        // Associer la grille de l'interface graphique ici
-        grille.setOnTouchListener(new View.OnTouchListener() {
+        sudokuGrid.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    x = grille.getXFromMatrix((int) event.getX());
-                    y = grille.getYFromMatrix((int) event.getY());
-                    if (x < 9 && y < 9 && grille.isNotFix(x, y))
+                    x = sudokuGrid.getXFromMatrix((int) event.getX());
+                    y = sudokuGrid.getYFromMatrix((int) event.getY());
+                    if (x < 9 && y < 9 && sudokuGrid.isNotFix(x, y))
                         startActivityForResult(intent, CHOIX_NUM_FENETRE);
                 }
                 return true;
@@ -80,7 +73,6 @@ public class activity_jeu extends AppCompatActivity {
         Button validerB = (Button) findViewById(R.id.ValiderButton);
         validerB.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//Code de validation de grille
                 valider(v);
             }
         });
@@ -96,13 +88,13 @@ public class activity_jeu extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0: //nouvelle partie
-                        Intent intent = new Intent(view.getContext(),activity_difficulty.class);
+                        Intent intent = new Intent(view.getContext(),DifficultyActivity.class);
                         startActivity(intent);
                         mDrawerLayout.closeDrawers();
                         break;
                     case 1: //help
-                        grille.setHelperOn(!grille.isHelperOn());
-                        grille.invalidate();
+                        sudokuGrid.setHelperOn(!sudokuGrid.isHelperOn());
+                        sudokuGrid.invalidate();
                         mDrawerLayout.closeDrawers();
                         break;
                     case 2: //valider
@@ -110,12 +102,12 @@ public class activity_jeu extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
                         break;
                     case 3: //Resoudre or solve the grid
-                        BacktrackingSudokuSolver.IsGridValide(grille.getOriginalMatrix());
-                        grille.invalidate();
+                        BacktrackingSudokuSolver.IsGridValide(sudokuGrid.getOriginalMatrix());
+                        sudokuGrid.invalidate();
                         mDrawerLayout.closeDrawers();
                         break;
                     case 4: //Credit, A propos
-                        Intent inte = new Intent(view.getContext(),activity_about.class);
+                        Intent inte = new Intent(view.getContext(),AboutActivity.class);
                         startActivity(inte);
                         mDrawerLayout.closeDrawers();
                         break;
@@ -147,7 +139,7 @@ public class activity_jeu extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
@@ -188,11 +180,10 @@ public class activity_jeu extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int request, int result, Intent intent) {
-        // verifier si la case n'est pas fixe, on lui affecte le numero result
         if (request == CHOIX_NUM_FENETRE) {
             if(result == Activity.RESULT_OK){
                 String ch=intent.getStringExtra("choix");
-                grille.set(x,y, Integer.parseInt(ch));
+                sudokuGrid.set(x,y, Integer.parseInt(ch));
                 Toast.makeText(this, ch,
                         Toast.LENGTH_SHORT).show();
             }
@@ -203,19 +194,18 @@ public class activity_jeu extends AppCompatActivity {
     }
 
     public void valider(View v) {
-        boolean resultat = grille.isValid() ;
+        boolean resultat = sudokuGrid.isValid() ;
         if(resultat){
-            grille.setStateRect(StateRect.WinningRect);
-            grille.invalidate();
-            Toast.makeText(this, "Grille Valide",
+            sudokuGrid.setStateRect(StateRect.WinningRect);
+            sudokuGrid.invalidate();
+            Toast.makeText(this, "You Won",
                     Toast.LENGTH_LONG).show();
         }
         else{
-            grille.setStateRect(StateRect.LoosingRect);
-            grille.invalidate();
-            Toast.makeText(this, "Grille Non Valide",
+            sudokuGrid.setStateRect(StateRect.LoosingRect);
+            sudokuGrid.invalidate();
+            Toast.makeText(this, "Try again",
                     Toast.LENGTH_LONG).show();
-            System.out.println("Resultat : "+resultat);
         }
     }
 }

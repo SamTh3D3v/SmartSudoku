@@ -6,19 +6,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class activity_difficulty extends AppCompatActivity {
+public class DifficultyActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_difficulty);
+        setContentView(R.layout.difficulty_activity_layout);
 
         Button hardB=(Button) findViewById(R.id.HardButton);
         hardB.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent=new Intent(view.getContext(),activity_jeu.class);
-                intent.putExtra("diff",Difficulty.Medium.getValue());
+                Intent intent=new Intent(view.getContext(),GameActivity.class);
+                intent.putExtra("diff", DifficultyEnum.Medium.getValue());
                 startActivity(intent);
             }
         });
@@ -27,8 +27,8 @@ public class activity_difficulty extends AppCompatActivity {
         easyB.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent=new Intent(view.getContext(),activity_jeu.class);
-                intent.putExtra("diff",Difficulty.Easy.getValue());
+                Intent intent=new Intent(view.getContext(),GameActivity.class);
+                intent.putExtra("diff", DifficultyEnum.Easy.getValue());
                 startActivity(intent);
             }
         });
@@ -37,8 +37,8 @@ public class activity_difficulty extends AppCompatActivity {
         verryHardB.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent=new Intent(view.getContext(),activity_jeu.class);
-                intent.putExtra("diff",Difficulty.Hard.getValue());
+                Intent intent=new Intent(view.getContext(),GameActivity.class);
+                intent.putExtra("diff", DifficultyEnum.Hard.getValue());
                 startActivity(intent);
             }
         });

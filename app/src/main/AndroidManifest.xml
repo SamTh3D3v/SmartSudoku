@@ -15,11 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_jeu" android:screenOrientation="portrait"
+        <activity android:name=".GameActivity" android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".activity_about" />
-        <activity android:name=".activity_choix" />
-        <activity android:name=".activity_difficulty"></activity>
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".ChoiceActivity" />
+        <activity android:name=".DifficultyActivity"></activity>
 
 
     </application>

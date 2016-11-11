@@ -2,7 +2,6 @@ package com.ubo.elhamer.smartsudokuelhamer;
 
 /**
  * Created by Elhamer Oussama on 10/31/2016.
- * Permet de resoudre une grille donnee
  */
 
 public class BacktrackingSudokuSolver {
@@ -37,7 +36,6 @@ public class BacktrackingSudokuSolver {
     {
         return isGridValide(grid,0);
     }
-   //metod recursive pour resoudre la grille a partir de la position en parametre
     static Boolean isGridValide(int[][] grid, int position)
     {
         if (position == matrixSize*matrixSize)
