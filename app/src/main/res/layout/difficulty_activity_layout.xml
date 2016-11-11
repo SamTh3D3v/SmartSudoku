@@ -18,15 +18,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true">
 
-        <TextView
-            android:text="degré de difficulté"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/difficultyText"
-            android:textColor="@color/colorWhite"/>
-
         <Button
-            android:text="Simple"
+            android:text="Easy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/EasyButton"
@@ -35,7 +28,7 @@
             android:background="@color/colorOrange"/>
 
         <Button
-            android:text="Moyen"
+            android:text="HARD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/HardButton"
@@ -44,7 +37,7 @@
             android:background="@color/colorOrange"/>
 
         <Button
-            android:text="Dur"
+            android:text="VERY HARD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/VeryHardButton"

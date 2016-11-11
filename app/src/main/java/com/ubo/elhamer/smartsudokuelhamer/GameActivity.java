@@ -79,7 +79,7 @@ public class GameActivity extends AppCompatActivity {
 
     }
     private void addDrawerItems() {
-        String[] menuArray = { "Nouveau", "Aide ON/OFF","Valider","Resoudre", "A propos" };
+        String[] menuArray = { "New", "Help ON/OFF","Check","Solve", "Credit" };
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuArray);
         mDrawerList.setAdapter(mAdapter);
 

@@ -27,7 +27,7 @@ android:background="@drawable/backgraound"
             android:layout_weight="0.26" />
 
         <Button
-            android:text="Jouer"
+            android:text="PLAY"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/JouerButton"
@@ -38,7 +38,7 @@ android:background="@drawable/backgraound"
             android:background="@color/colorOrange"/>
 
         <Button
-            android:text="A propos"
+            android:text="CREDIT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/AboutButton"
